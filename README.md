@@ -1,4 +1,4 @@
-This is springboot crud api movie service with database MySQL.
+This is simple springboot crud api movie service with database MySQL.
 
 <h1>How to Install and Run the Project</h1>
 First you have to create a database named <b>demo</b>, then you can run the java application. The table will be created automatically.
