@@ -4,7 +4,7 @@ This is springboot crud api movie service with database MySQL.
 First you have to create a database named <b>demo</b>, then you can run the java application. The table will be created automatically.
 
 <h1>Social Media</h1>
-<a href="https://www.linkedin.com/in/dhimas-panji-b04471155/">
+<a href="https://www.linkedin.com/in/dhimas-panji-b04471155/" target="_blank">
   <img align="left" src="https://raw.githubusercontent.com/yushi1007/yushi1007/main/images/linkedin.svg" alt="Dhimas Panji | LinkedIn" width="21px"/>
 </a>
 
