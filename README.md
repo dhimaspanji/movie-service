@@ -1,4 +1,4 @@
-This is simple springboot crud api movie service with database MySQL.
+This is simple Spring Boot crud api movie service. Development using JDK 17, Spring Boot 3.2.3, JUnit, JPA, Lombok and MySQL.
 
 <h1>How to Install and Run the Project</h1>
 First you have to create a database named <b>demo</b>, then you can run the java application. The table will be created automatically.
