@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.movie.movieservice.dao.MovieDao;
@@ -24,11 +25,31 @@ public class MovieService {
 		return movieDao.findAll();
 	}
 	
-	public Movie getById(Long id) {
-		Optional<Movie> data = movieDao.findById(id);
+	public Object getByKeyword(String keyword) {
+		boolean isId;
+		Long id = null;
 		
-		if (data.isPresent()) {
-			return data.get();
+		try {
+			id = Long.parseLong(StringUtils.deleteWhitespace(keyword));
+			isId = true;
+		} catch (Exception e) {
+			isId = false;
+			
+			log.info("Keyword is not id : ", keyword);			
+		}
+		
+		if (isId) {
+			Optional<Movie> data = movieDao.findById(id);
+			
+			if (data.isPresent()) {
+				return data.get();
+			}
+		} else {
+			List<Movie> data = movieDao.findByTitle(keyword);
+			
+			if (data.size() > 0) {
+				return data;
+			}
 		}
 		
 		return null;

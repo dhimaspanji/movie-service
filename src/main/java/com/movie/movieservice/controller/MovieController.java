@@ -54,13 +54,13 @@ public class MovieController {
 		return resp;
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{keyword}")
 	@ResponseStatus(HttpStatus.OK)
-	public Response getById(@PathVariable("id") Long id) {
+	public Response getByKeyword(@PathVariable("keyword") String keyword) {
 		Response resp = new Response();
 		
 		try {
-			Movie data = movieService.getById(id);
+			Object data = movieService.getByKeyword(keyword);
 			
 			if (data != null) {
 				resp.setCode(HttpStatus.OK.value());
@@ -86,15 +86,22 @@ public class MovieController {
 		Response resp = new Response();
 		
 		try {
-			Movie data = movieService.create(requestData);
+			Float rating = requestData.getRating();
 			
-			if (data != null) {
-				resp.setCode(HttpStatus.CREATED.value());
-				resp.setMessage("Create success");
-				resp.setData(data);
+			if (rating > 10.0) {
+				resp.setCode(HttpStatus.BAD_REQUEST.value());
+				resp.setMessage("Rating must not exceed 10.0");
 			} else {
-				resp.setCode(HttpStatus.NOT_FOUND.value());
-				resp.setMessage("Data not found");
+				Movie data = movieService.create(requestData);
+				
+				if (data != null) {
+					resp.setCode(HttpStatus.CREATED.value());
+					resp.setMessage("Create success");
+					resp.setData(data);
+				} else {
+					resp.setCode(HttpStatus.NOT_FOUND.value());
+					resp.setMessage("Data not found");
+				}
 			}
 		} catch (Exception e) {
 			log.error("Error : ", e);
@@ -112,15 +119,22 @@ public class MovieController {
 		Response resp = new Response();
 		
 		try {
-			Movie data = movieService.update(id, requestData);
+			Float rating = requestData.getRating();
 			
-			if (data != null) {
-				resp.setCode(HttpStatus.CREATED.value());
-				resp.setMessage("Update success");
-				resp.setData(data);
+			if (rating > 10.0) {
+				resp.setCode(HttpStatus.BAD_REQUEST.value());
+				resp.setMessage("Rating must not exceed 10.0");
 			} else {
-				resp.setCode(HttpStatus.NOT_FOUND.value());
-				resp.setMessage("Data not found");
+				Movie data = movieService.update(id, requestData);
+				
+				if (data != null) {
+					resp.setCode(HttpStatus.CREATED.value());
+					resp.setMessage("Update success");
+					resp.setData(data);
+				} else {
+					resp.setCode(HttpStatus.NOT_FOUND.value());
+					resp.setMessage("Data not found");
+				}
 			}
 		} catch (Exception e) {
 			log.error("Error : ", e);
